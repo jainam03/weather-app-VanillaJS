@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <title>Weather App - Vanilla JS</title>
+</head>
+
+<body>
+  <div class="app-wrap">
+    <h2 style="text-align: center; color: rgba(255,255,255,0.8);">Search for any city or region of your choice...!
+    </h2>
+    <header>
+      <br>
+      <input type="text" class="search-box" autocomplete="on" placeholder="Search for a city/region..." />
+      <div class="button-div">
+
+        <button id="clear-btn">Clear</button>
+      </div>
+    </header>
+    <main>
+      <section class="location">
+        <div class="city"></div>
+        <div class="date"></div>
+      </section>
+      <div class="current">
+        <div class="temp"></div>
+        <div class="feels-like"></div>
+        <div class="weather"></div>
+        <div class="hi-low"></div>
+      </div>
+      <br>
+      <footer>Made with 💙 in Vanilla Javascript</footer>
+      <br>
+      <div class="icon-div">
+
+        <a href="https://github.com/jainam03/weather-app-VanillaJS" target="_blank"
+          style="color: rgba(255, 255, 255, 0.8);">
+          <i class="fa fa-github fa-2x"></i>
+        </a>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
