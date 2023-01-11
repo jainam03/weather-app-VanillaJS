@@ -5,20 +5,36 @@ const api = {
 
 const searchBox = document.querySelector('.search-box')
 let clearBtn = document.getElementById("clear-btn")
+let searchBtn = document.getElementById("search-btn")
 
-searchBox.addEventListener('keypress', setQuery);
+// searchBox.addEventListener('keypress', setQuery);
+
+// function setQuery(evt) {
+//   if (evt.keyCode == 13) {
+//     getResults(searchBox.value);
+
+//     if(result == err) {
+//       console.log(err);
+//     } else {
+//       getResults()
+//     }
+//   }
+// }
+
+searchBtn.addEventListener('click',setQuery);
 
 function setQuery(evt) {
-  if (evt.keyCode == 13) {
+  
     getResults(searchBox.value);
 
     if(result == err) {
-      console.log(err);
+      alert("Some error occured")
     } else {
       getResults()
     }
   }
-}
+
+
 
 function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)

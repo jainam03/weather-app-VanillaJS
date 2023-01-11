@@ -52,20 +52,38 @@ header input:focus {
 
 .button-div {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
-  flex-direction: column;
-  flex-basis: 30%;
+  flex-direction: row;
+  /* flex-basis: 30%; */
 
-  margin-right: 390px;
+  /* margin-right: 390px; */
 }
 
 #clear-btn {
   /* position: absolute; */
   cursor: pointer;
   padding: 10px 15px 10px 15px;
-  margin: 35px 70px 0 460px;
+  /* margin: 35px 70px 0 460px; */
+  margin: 35px 0px 0 10px;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 16px;
+
+  font-family: 'montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+
+  transition: 0.3s;
+}
+
+#search-btn {
+  /* position: absolute; */
+  cursor: pointer;
+  padding: 10px 15px 10px 15px;
+  margin: 35px 0px 0 -10px;
 
   background-color: rgba(255, 255, 255, 0.5);
   border: none;
@@ -80,6 +98,18 @@ header input:focus {
 
 #clear-btn:active {
   transform: translateY(4px);
+}
+
+#clear-btn:focus {
+  border: none;
+}
+
+#search-btn:active {
+  transform: translateY(4px);
+}
+
+#search-btn:focus {
+  border: none;
 }
 
 main {
