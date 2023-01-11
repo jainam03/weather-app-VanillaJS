@@ -21,18 +21,22 @@ let searchBtn = document.getElementById("search-btn")
 //   }
 // }
 
-searchBtn.addEventListener('click',setQuery);
+searchBtn.addEventListener('click', setQuery);
 
 function setQuery(evt) {
-  
-    getResults(searchBox.value);
 
-    if(result == err) {
-      alert("Some error occured")
-    } else {
-      getResults()
-    }
+  if(searchBox.value === "") {
+    alert("Please enter a city/region of your choice")
   }
+
+  getResults(searchBox.value);
+
+  if (result == err) {
+    alert("Some error occured")
+  } else {
+    getResults()
+  }
+}
 
 
 
