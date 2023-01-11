@@ -11,6 +11,12 @@ searchBox.addEventListener('keypress', setQuery);
 function setQuery(evt) {
   if (evt.keyCode == 13) {
     getResults(searchBox.value);
+
+    if(result == err) {
+      console.log(err);
+    } else {
+      getResults()
+    }
   }
 }
 
