@@ -25,7 +25,7 @@ searchBtn.addEventListener('click', setQuery);
 
 function setQuery(evt) {
 
-  if(searchBox.value === "") {
+  if (searchBox.value === "") {
     alert("Please enter a city/region of your choice")
   }
 
@@ -87,5 +87,8 @@ function dateBuilder(d) {
 clearBtn.addEventListener("click", function () {
   console.log("clear button pressed")
   // searchBox.value = "";
-  window.location.reload();
+
+  setTimeout(() => {
+    window.location.reload()
+  }, 100)
 })
