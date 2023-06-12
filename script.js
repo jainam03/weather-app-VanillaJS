@@ -7,47 +7,64 @@ const searchBox = document.querySelector('.search-box')
 let clearBtn = document.getElementById("clear-btn")
 let searchBtn = document.getElementById("search-btn")
 
-// searchBox.addEventListener('keypress', setQuery);
+searchBtn.addEventListener('click', setQuery);
 
 // function setQuery(evt) {
-//   if (evt.keyCode == 13) {
-//     getResults(searchBox.value);
 
-//     if(result == err) {
-//       console.log(err);
-//     } else {
-//       getResults()
-//     }
+//   if (searchBox.value === "") {
+//     alert("Please enter a city/region of your choice")
+//   }
+
+//   getResults(searchBox.value);
+
+//   if (result == err) {
+//     alert("Some error occured")
+//   } else {
+//     getResults()
 //   }
 // }
 
-searchBtn.addEventListener('click', setQuery);
-
 function setQuery(evt) {
-
-  if (searchBox.value === "") {
-    alert("Please enter a city/region of your choice")
+  if(searchBox.value === "" ) {
+    alert("Please enter a valid city name.")
+    return 
   }
 
-  getResults(searchBox.value);
-
-  if (result == err) {
-    alert("Some error occured")
-  } else {
-    getResults()
-  }
+  getResults(searchBox.value)
 }
 
 
+// function getResults(query) {
+//   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+//     .then(weather => {
+//       return weather.json()
+//     }).then(displayResults);
+// }
 
 function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather => {
-      return weather.json()
-    }).then(displayResults);
+  .then(response => {
+    if(!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json()
+  })
+  .then(displayResults)
+  .catch(error => {
+    console.log(error);
+    displayErrorMessage("Data unavailable, please search for a valid city.")
+  })
+}
+
+function displayErrorMessage(message) {
+  let errorMessageContent = document.getElementById("error-message")
+  errorMessageContent.textContent = message
 }
 
 function displayResults(weather) {
+  let errorMessageContent = document.getElementById("error-message")
+  errorMessageContent.textContent = ""
+
   console.log(weather)
 
   let city = document.querySelector('.location .city');

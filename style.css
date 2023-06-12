@@ -16,6 +16,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(211, 119, 48, 0.533));
+
+  /* background-size: auto 100%; */
 }
 
 h2 {
@@ -50,29 +52,23 @@ header input:focus {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.button-div {
+/* .button-div {
   display: flex;
   justify-content: space-around;
   align-items: center;
 
   flex-direction: row;
-  /* flex-basis: 30%; */
-
-  /* margin-right: 390px; */
 }
 
 #clear-btn {
-  /* position: absolute; */
   cursor: pointer;
   padding: 10px 20px 10px 20px;
-  /* margin: 35px 70px 0 460px; */
   margin: 35px 0px 0 10px;
 
   background-color: rgba(255, 255, 255, 0.5);
   border: none;
   border-radius: 16px;
 
-  font-family: 'montserrat', sans-serif;
   font-size: 18px;
   font-weight: 500;
 
@@ -80,7 +76,6 @@ header input:focus {
 }
 
 #search-btn {
-  /* position: absolute; */
   cursor: pointer;
   padding: 10px 15px 10px 15px;
   margin: 35px 0px 0 -10px;
@@ -89,7 +84,6 @@ header input:focus {
   border: none;
   border-radius: 16px;
 
-  font-family: 'montserrat', sans-serif;
   font-size: 18px;
   font-weight: 500;
 
@@ -110,7 +104,36 @@ header input:focus {
 
 #search-btn:focus {
   border: none;
+} */
+
+.button {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 16px;
+  font-family: 'montserrat', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
 }
+
+#clear-btn {
+  margin: 35px 0 0 10px;
+}
+
+#search-btn {
+  margin: 35px 0 0 -10px;
+}
+
+.button:active {
+  transform: translateY(4px);
+}
+
+.button:focus {
+  outline: none;
+}
+
 
 main {
   flex: 1 1 100%;
@@ -135,18 +158,19 @@ main {
 
 .current .temp {
   color: #FFF;
-  font-size: 65px;
+  font-size: 60px;
   font-weight: 900;
   margin: 30px 0px;
-  text-shadow: 2px 5px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 5px rgba(0, 0, 0, 0.8);
 
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(9px);
   padding: 15px 25px 15px 25px;
   border-radius: 16px;
 
   text-align: center;
 
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 .current .temp span {
@@ -185,7 +209,16 @@ footer {
 
   text-align: center;
 
-  font-family: 'montserrat', sans-serif;
   font-size: 15px;
   font-weight: 460;
+}
+
+#error-message {
+  padding: 1rem 0 0 0;
+
+  color: #fff;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
