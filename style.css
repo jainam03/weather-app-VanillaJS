@@ -52,60 +52,6 @@ header input:focus {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-/* .button-div {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  flex-direction: row;
-}
-
-#clear-btn {
-  cursor: pointer;
-  padding: 10px 20px 10px 20px;
-  margin: 35px 0px 0 10px;
-
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 16px;
-
-  font-size: 18px;
-  font-weight: 500;
-
-  transition: 0.3s;
-}
-
-#search-btn {
-  cursor: pointer;
-  padding: 10px 15px 10px 15px;
-  margin: 35px 0px 0 -10px;
-
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 16px;
-
-  font-size: 18px;
-  font-weight: 500;
-
-  transition: 0.3s;
-}
-
-#clear-btn:active {
-  transform: translateY(4px);
-}
-
-#clear-btn:focus {
-  border: none;
-}
-
-#search-btn:active {
-  transform: translateY(4px);
-}
-
-#search-btn:focus {
-  border: none;
-} */
-
 .button {
   cursor: pointer;
   padding: 10px 15px;
