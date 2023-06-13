@@ -25,9 +25,9 @@ searchBtn.addEventListener('click', setQuery);
 // }
 
 function setQuery(evt) {
-  if(searchBox.value === "" ) {
+  if (searchBox.value === "") {
     alert("Please enter a valid city name.")
-    return 
+    return
   }
 
   getResults(searchBox.value)
@@ -43,17 +43,25 @@ function setQuery(evt) {
 
 function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-  .then(response => {
-    if(!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json()
-  })
-  .then(displayResults)
-  .catch(error => {
-    console.log(error);
-    displayErrorMessage("Data unavailable, please search for a valid city.")
-  })
+    .then(response => {
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error("City not found")
+        } else {
+          throw new errorMonitor("Network error")
+        }
+      }
+      return response.json()
+    })
+    .then(displayResults)
+    .catch(error => {
+      console.log(error);
+      if (error.message === "City not found") {
+        displayErrorMessage("City not found. Please enter a valid city name.")
+      } else {
+        displayErrorMessage("Network error. Please check your internet connection")
+      }
+    })
 }
 
 function displayErrorMessage(message) {
