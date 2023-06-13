@@ -90,7 +90,7 @@ function displayResults(weather) {
   weather_el.innerText = weather.weather[0].main;
 
   let hilow = document.querySelector('.hi-low')
-  hilow.innerText = `Max:- ${weather.main.temp_min}°c / Min:- ${weather.main.temp_max}°c`;
+  hilow.innerText = `Max:- ${weather.main.temp_max}°c / Min:- ${weather.main.temp_min}°c`;
 
   let feelsLike = document.querySelector('.feels-like')
   feelsLike.innerText = `Feels like : ${weather.main.feels_like}`;
