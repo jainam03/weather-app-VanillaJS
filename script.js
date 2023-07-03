@@ -52,6 +52,7 @@ function getResults(query) {
         }
       }
       return response.json()
+      
     })
     .then(displayResults)
     .catch(error => {
@@ -84,16 +85,19 @@ function displayResults(weather) {
   date.innerText = dateBuilder(now);
 
   let temp = document.querySelector('.current .temp')
-  temp.innerHTML = `${(weather.main.temp).toFixed(1)} <span>°c</span>`;
+  temp.innerHTML = `${(weather.main.temp).toFixed(0)}°c`;
 
   let weather_el = document.querySelector('.current .weather')
   weather_el.innerText = weather.weather[0].main;
 
   let hilow = document.querySelector('.hi-low')
-  hilow.innerText = `Max:- ${weather.main.temp_max}°c / Min:- ${weather.main.temp_min}°c`;
+  hilow.innerText = `Max:- ${(weather.main.temp_max).toFixed(0)}°c / Min:- ${weather.main.temp_min.toFixed(0)}°c`;
 
   let feelsLike = document.querySelector('.feels-like')
-  feelsLike.innerText = `Feels like : ${weather.main.feels_like}`;
+  feelsLike.innerText = `Feels like : ${weather.main.feels_like.toFixed(0)}°c`;
+
+  let windSpeedData = document.getElementById("wind-speed")
+  windSpeedData.innerText = `Wind-speed: ${weather.wind.speed} meter/sec`
 }
 
 function dateBuilder(d) {
