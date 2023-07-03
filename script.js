@@ -9,22 +9,7 @@ let searchBtn = document.getElementById("search-btn")
 
 searchBtn.addEventListener('click', setQuery);
 
-// function setQuery(evt) {
-
-//   if (searchBox.value === "") {
-//     alert("Please enter a city/region of your choice")
-//   }
-
-//   getResults(searchBox.value);
-
-//   if (result == err) {
-//     alert("Some error occured")
-//   } else {
-//     getResults()
-//   }
-// }
-
-function setQuery(evt) {
+function setQuery(_evt) {
   if (searchBox.value === "") {
     alert("Please enter a valid city name.")
     return
@@ -32,14 +17,6 @@ function setQuery(evt) {
 
   getResults(searchBox.value)
 }
-
-
-// function getResults(query) {
-//   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-//     .then(weather => {
-//       return weather.json()
-//     }).then(displayResults);
-// }
 
 function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
@@ -88,7 +65,7 @@ function displayResults(weather) {
   temp.innerHTML = `${(weather.main.temp).toFixed(0)}°c`;
 
   let weather_el = document.querySelector('.current .weather')
-  weather_el.innerText = weather.weather[0].main;
+  weather_el.innerText = `${weather.weather[0].main}`;
 
   let hilow = document.querySelector('.hi-low')
   hilow.innerText = `Max:- ${(weather.main.temp_max).toFixed(0)}°c / Min:- ${weather.main.temp_min.toFixed(0)}°c`;
