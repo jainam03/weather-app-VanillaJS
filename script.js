@@ -22,6 +22,7 @@ function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(response => {
       if (!response.ok) {
+        console.log(response)
         if (response.status === 404) {
           throw new Error("City not found")
         } else {
@@ -56,6 +57,10 @@ function displayResults(weather) {
   let city = document.querySelector('.location .city');
 
   city.innerText = `${weather.name}, ${weather.sys.country}`
+
+  let coords = document.querySelector('.location .coords')
+
+  coords.innerText = `Co-ordinates: Lat:${weather.coord.lat}, Lon:${weather.coord.lon}`
 
   let now = new Date();
   let date = document.querySelector('.location .date')
