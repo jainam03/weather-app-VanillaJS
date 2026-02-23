@@ -8,7 +8,6 @@
 
   <link rel="stylesheet" href="style.css">
 
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VE5M5XMXJD"></script>
   <script>
@@ -25,42 +24,43 @@
 
 <body>
   <div class="app-wrap">
-    <h2 style="text-align: center; color: rgba(255,255,255,0.8);">Search for any city or region of your choice...!
-    </h2>
-    <header>
-      <div id="error-message"></div>
-      <br>
-      <input type="text" class="search-box" autocomplete="on" placeholder="Search for a city/region..." />
-      <div class="button-div">
-        <button  class="button" id="search-btn">Search</button>
-        <button  class="button" id="clear-btn">Clear</button>
-      </div>
-    </header>
-    <main>
+    <main class="weather-panel">
+      <h1>Weather Dashboard</h1>
+      <p class="subtitle">Search for any city or region to view real-time weather details.</p>
+
+      <header>
+        <label class="sr-only" for="city-search">Search city</label>
+        <input id="city-search" type="text" class="search-box" autocomplete="on" placeholder="Search for a city/region..." />
+        <div class="button-div">
+          <button class="button" id="search-btn">Search</button>
+          <button class="button" id="clear-btn">Clear</button>
+        </div>
+        <div id="error-message" role="status" aria-live="polite"></div>
+      </header>
+
       <section class="location">
-        <div class="city"></div>
-        <div class="coords" ></div>
+        <div class="city">Start by searching for a city</div>
+        <div class="coords"></div>
         <div class="date"></div>
       </section>
-      <div class="current">
-        <div class="temp"></div>
+
+      <section class="current">
+        <div class="temp">--°C</div>
         <div class="feels-like"></div>
         <div class="weather"></div>
         <div class="hi-low"></div>
-        <div class="hi-low" id="wind-speed" ></div>
-      </div>
-      <br>
-      <footer>Made with 💙 in Vanilla Javascript</footer>
-      <br>
+        <div class="hi-low" id="wind-speed"></div>
+      </section>
 
-      <a href="https://github.com/jainam03/weather-app-VanillaJS" target="_blank"
-        style="color: rgba(255, 255, 255, 0.8);">
-        <i class="fa fa-github fa-2x"></i>
-      </a>
+      <footer>
+        <span>Made with 💙 in Vanilla Javascript</span>
+        <a href="https://github.com/jainam03/weather-app-VanillaJS" target="_blank" rel="noopener noreferrer"
+          aria-label="Open GitHub repository">
+          <i class="fa fa-github fa-2x"></i>
+        </a>
+      </footer>
     </main>
-
   </div>
-
 
   <script type="text/javascript" src="./config.js"></script>
   <script type="text/javascript" src="./script.js"></script>

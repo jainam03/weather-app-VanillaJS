@@ -3,103 +3,114 @@ const api = {
   base: config.MY_URL
 };
 
-const searchBox = document.querySelector('.search-box')
-let clearBtn = document.getElementById("clear-btn")
-let searchBtn = document.getElementById("search-btn")
+const searchBox = document.querySelector('.search-box');
+const clearBtn = document.getElementById('clear-btn');
+const searchBtn = document.getElementById('search-btn');
+const errorMessageContent = document.getElementById('error-message');
 
 searchBtn.addEventListener('click', setQuery);
+searchBox.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Enter') {
+    setQuery();
+  }
+});
 
-function setQuery(_evt) {
-  if (searchBox.value === "") {
-    alert("Please enter a valid city name.")
-    return
+function setQuery() {
+  const query = searchBox.value.trim();
+
+  if (query === '') {
+    displayErrorMessage('Please enter a valid city name.', true);
+    return;
   }
 
-  getResults(searchBox.value)
+  getResults(query);
 }
 
 function getResults(query) {
+  displayErrorMessage('Fetching weather details...');
+  searchBtn.disabled = true;
+
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        console.log(response)
         if (response.status === 404) {
-          throw new Error("City not found")
-        } else {
-          throw new errorMonitor("Network error")
+          throw new Error('City not found');
         }
+
+        throw new Error('Network error');
       }
-      return response.json()
-      
+      return response.json();
     })
     .then(displayResults)
-    .catch(error => {
-      console.log(error);
-      if (error.message === "City not found") {
-        displayErrorMessage("City not found. Please enter a valid city name.")
+    .catch((error) => {
+      if (error.message === 'City not found') {
+        displayErrorMessage('City not found. Please enter a valid city name.', true);
       } else {
-        displayErrorMessage("Network error. Please check your internet connection")
+        displayErrorMessage('Network error. Please check your internet connection.', true);
       }
     })
+    .finally(() => {
+      searchBtn.disabled = false;
+    });
 }
 
-function displayErrorMessage(message) {
-  let errorMessageContent = document.getElementById("error-message")
-  errorMessageContent.textContent = message
+function displayErrorMessage(message, isError = false) {
+  errorMessageContent.textContent = message;
+  errorMessageContent.classList.toggle('error', isError);
 }
 
 function displayResults(weather) {
-  let errorMessageContent = document.getElementById("error-message")
-  errorMessageContent.textContent = ""
+  displayErrorMessage('Weather loaded successfully.');
 
-  console.log(weather)
+  const city = document.querySelector('.location .city');
+  city.innerText = `${weather.name}, ${weather.sys.country}`;
 
-  let city = document.querySelector('.location .city');
+  const coords = document.querySelector('.location .coords');
+  coords.innerText = `Coordinates: Lat ${weather.coord.lat}, Lon ${weather.coord.lon}`;
 
-  city.innerText = `${weather.name}, ${weather.sys.country}`
-
-  let coords = document.querySelector('.location .coords')
-
-  coords.innerText = `Co-ordinates: Lat:${weather.coord.lat}, Lon:${weather.coord.lon}`
-
-  let now = new Date();
-  let date = document.querySelector('.location .date')
+  const now = new Date();
+  const date = document.querySelector('.location .date');
   date.innerText = dateBuilder(now);
 
-  let temp = document.querySelector('.current .temp')
-  temp.innerHTML = `${(weather.main.temp).toFixed(0)}°c`;
+  const temp = document.querySelector('.current .temp');
+  temp.innerHTML = `${weather.main.temp.toFixed(0)}°C`;
 
-  let weather_el = document.querySelector('.current .weather')
-  weather_el.innerText = `${weather.weather[0].main}`;
+  const weatherEl = document.querySelector('.current .weather');
+  weatherEl.innerText = weather.weather[0].main;
 
-  let hilow = document.querySelector('.hi-low')
-  hilow.innerText = `Max:- ${(weather.main.temp_max).toFixed(0)}°c / Min:- ${weather.main.temp_min.toFixed(0)}°c`;
+  const hiLow = document.querySelector('.hi-low');
+  hiLow.innerText = `Max: ${weather.main.temp_max.toFixed(0)}°C / Min: ${weather.main.temp_min.toFixed(0)}°C`;
 
-  let feelsLike = document.querySelector('.feels-like')
-  feelsLike.innerText = `Feels like : ${weather.main.feels_like.toFixed(0)}°c`;
+  const feelsLike = document.querySelector('.feels-like');
+  feelsLike.innerText = `Feels like: ${weather.main.feels_like.toFixed(0)}°C`;
 
-  let windSpeedData = document.getElementById("wind-speed")
-  windSpeedData.innerText = `Wind-speed: ${weather.wind.speed} meter/sec`
+  const windSpeedData = document.getElementById('wind-speed');
+  windSpeedData.innerText = `Wind speed: ${weather.wind.speed} m/s`;
 }
 
 function dateBuilder(d) {
-  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  let day = days[d.getDay()];
-  let date = d.getDate();
-  let month = months[d.getMonth()];
-  let year = d.getFullYear();
+  const day = days[d.getDay()];
+  const date = d.getDate();
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
 
   return `${day} ${date} ${month} ${year}`;
 }
 
-clearBtn.addEventListener("click", function () {
-  console.log("clear button pressed")
-  // searchBox.value = "";
+clearBtn.addEventListener('click', () => {
+  searchBox.value = '';
 
-  setTimeout(() => {
-    window.location.reload()
-  }, 100)
-})
+  document.querySelector('.location .city').innerText = 'Start by searching for a city';
+  document.querySelector('.location .coords').innerText = '';
+  document.querySelector('.location .date').innerText = '';
+  document.querySelector('.current .temp').innerText = '--°C';
+  document.querySelector('.current .weather').innerText = '';
+  document.querySelector('.current .feels-like').innerText = '';
+  document.querySelector('.hi-low').innerText = '';
+  document.getElementById('wind-speed').innerText = '';
+
+  displayErrorMessage('');
+});
