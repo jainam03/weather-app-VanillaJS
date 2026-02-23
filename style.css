@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+:root {
+  --text-primary: #f8fafc;
+  --text-soft: #dbe7ff;
+  --text-muted: #c7d2e8;
+  --panel-bg: rgba(10, 20, 35, 0.58);
+  --panel-border: rgba(255, 255, 255, 0.24);
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --card-border: rgba(255, 255, 255, 0.18);
+  --accent: #f8c24f;
+  --accent-strong: #f59e0b;
+  --danger: #ffd0d0;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-image: url('bg.jpg');

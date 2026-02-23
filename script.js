@@ -97,8 +97,9 @@ function dateBuilder(d) {
   const month = months[d.getMonth()];
   const year = d.getFullYear();
 
-  return `${day} ${date} ${month} ${year}`;
-}
+  document.getElementById('humidity').innerText = '--%';
+  document.getElementById('pressure').innerText = '-- hPa';
+  document.getElementById('visibility').innerText = '-- km';
 
 clearBtn.addEventListener('click', () => {
   searchBox.value = '';
